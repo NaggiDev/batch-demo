@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.viettel.vds</groupId>
+    <artifactId>user-management</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>user-management</name>
+    <description>Arch client description</description>
+
+    <parent>
+        <groupId>vn.com.viettel.vds</groupId>
+        <artifactId>java-spring-parent-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>vn.com.viettel.vds</groupId>
+            <artifactId>arch-grpc-test-client</artifactId>
+            <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.grpc</groupId>
+                    <artifactId>grpc-netty-shaded</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.grpc</groupId>
+                    <artifactId>grpc-protobuf</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.grpc</groupId>
+                    <artifactId>io.grpc:grpc-stub</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>vn.com.viettel.vds</groupId>
+            <artifactId>arch-lib</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+    </dependencies>
+    <profiles>
+    <profile>
+        <id>remove-resource</id>
+        <build>
+            <resources>
+                <resource>
+                    <directory>src/main/resources</directory>
+                    <filtering>true</filtering>
+                    <includes>
+                        <include>messages*.properties</include>
+                        <include>graphql/*</include>
+                    </includes>
+                </resource>
+            </resources>
+        </build>
+    </profile>
+    </profiles>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://nexus.digital.vn/repository/maven-snapshots</url>
+        </repository>
+        <repository>
+            <id>central2</id>
+            <url>http://nexus.digital.vn/repository/maven-public</url>
+        </repository>
+        <repository>
+            <id>maven_central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
+
+</project>
